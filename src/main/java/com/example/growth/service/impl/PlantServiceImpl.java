@@ -37,6 +37,7 @@ public class PlantServiceImpl implements PlantService {
 
     }
 
+    @Override
     public List<PlantCardDto> getPlants(int page, Long userId){
 
         Pageable pageable = PageRequest.of(page, 10);
@@ -45,11 +46,18 @@ public class PlantServiceImpl implements PlantService {
                 .collect(Collectors.toList());
     }
 
+    @Override
     public void deletePlant(Long plantId, Long userId){
         //todo... 나중에 익셉션 처리... 귀찮다 정말..
         Plant plant = plantRepository.findByIdAndUserId(plantId,userId)
                 .orElseThrow(RuntimeException::new);
         plantRepository.delete(plant);
+    }
+
+    @Override
+    public Plant getPlantDetail(Long id) {
+        //todo... 나중에 익셉션 처리... 귀찮다 정말..
+        return plantRepository.findById(id).orElseThrow(RuntimeException::new);
     }
 
 }

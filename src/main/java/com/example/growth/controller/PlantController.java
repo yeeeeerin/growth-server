@@ -1,6 +1,7 @@
 package com.example.growth.controller;
 
 
+import com.example.growth.domain.Plant;
 import com.example.growth.dto.PlantCardDto;
 import com.example.growth.dto.PlantDto;
 import com.example.growth.dto.api.PlantInfo;
@@ -14,7 +15,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+import sun.rmi.runtime.Log;
 
 import java.util.List;
 
@@ -35,15 +36,17 @@ public class PlantController {
     public ResponseEntity<PlantInfo> getPlantInfo(@RequestParam String name){
         return new ResponseEntity<>(plantInfoFetchService.getPlantInfo(name), HttpStatus.OK);
     }
+    
 
     @Auth
-    @PostMapping("/savePlant")
+    @PostMapping("plants/save")
     public ResponseEntity<String> savePlant(@RequestBody PlantDto plantDto, @RequestParam Long userId){
         plantService.savePlant(plantDto,userId);
         return new ResponseEntity<>("success!", HttpStatus.OK);
     }
 
-    @ApiOperation(value = "선택한 식물을 삭제합나디")
+
+    @ApiOperation(value = "자신의 식물들 리스트를 가져옵니다")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "page", value = "페이징", required = true, dataType = "int"),
             @ApiImplicitParam(name = "userId", value = "유저 pk 값", required = true, dataType = "long"),
@@ -55,8 +58,28 @@ public class PlantController {
         return new ResponseEntity<>(plants, HttpStatus.OK);
     }
 
+
+    @ApiOperation(value = "선택한 식물의 디테일 정보를 가져옵니다.")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "식물 pk 값", required = true, dataType = "long"),
+    })
+    @Auth
+    @PostMapping("/plants/{id}/detail")
+    public ResponseEntity<Plant> getPlantDetail(@PathVariable Long id){
+        Plant plant = plantService.getPlantDetail(id);
+        return new ResponseEntity<Plant>(plant, HttpStatus.OK);
+    }
+
+
+    @ApiOperation(value = "선택한 식물을 삭제합니다")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "plantId", value = "식물의 pk 값", required = true, dataType = "long"),
+            @ApiImplicitParam(name = "userId", value = "유저 pk 값", required = true, dataType = "long"),
+    })
+    @Auth
+    @PostMapping("plants/delete")
     public ResponseEntity<String> deletePlant(@RequestParam Long plantId,
-                                        @RequestParam Long userId){
+                                              @RequestParam Long userId){
         plantService.deletePlant(plantId,userId);
         return new ResponseEntity<>("success!", HttpStatus.OK);
     }

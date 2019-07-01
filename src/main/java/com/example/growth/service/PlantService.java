@@ -1,6 +1,7 @@
 package com.example.growth.service;
 
 
+import com.example.growth.domain.Plant;
 import com.example.growth.dto.PlantCardDto;
 import com.example.growth.dto.PlantDto;
 
@@ -10,4 +11,6 @@ public interface PlantService {
     void savePlant(PlantDto plantDto, Long userId);
     List<PlantCardDto> getPlants(int page, Long userId);
     void deletePlant(Long plantId, Long userId);
+
+    Plant getPlantDetail(Long id);
 }

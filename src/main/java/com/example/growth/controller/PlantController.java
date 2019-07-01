@@ -14,7 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import sun.rmi.runtime.Log;
+
 
 import java.util.List;
 
@@ -43,11 +43,22 @@ public class PlantController {
         return new ResponseEntity<>("success!", HttpStatus.OK);
     }
 
+    @ApiOperation(value = "선택한 식물을 삭제합나디")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "page", value = "페이징", required = true, dataType = "int"),
+            @ApiImplicitParam(name = "userId", value = "유저 pk 값", required = true, dataType = "long"),
+    })
     @Auth
     @PostMapping("/plants")
     public ResponseEntity<List<PlantCardDto>> getPlants(@RequestParam int page, @RequestParam Long userId){
         List plants = plantService.getPlants(page, userId);
         return new ResponseEntity<>(plants, HttpStatus.OK);
+    }
+
+    public ResponseEntity<String> deletePlant(@RequestParam Long plantId,
+                                        @RequestParam Long userId){
+        plantService.deletePlant(plantId,userId);
+        return new ResponseEntity<>("success!", HttpStatus.OK);
     }
 
 }

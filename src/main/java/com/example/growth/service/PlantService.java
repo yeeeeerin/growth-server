@@ -9,4 +9,5 @@ import java.util.List;
 public interface PlantService {
     void savePlant(PlantDto plantDto, Long userId);
     List<PlantCardDto> getPlants(int page, Long userId);
+    void deletePlant(Long plantId, Long userId);
 }

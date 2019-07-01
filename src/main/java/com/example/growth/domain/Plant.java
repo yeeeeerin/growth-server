@@ -3,9 +3,7 @@ package com.example.growth.domain;
 import com.example.growth.dto.PlantDto;
 import lombok.Getter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @Getter
@@ -35,12 +33,16 @@ public class Plant {
     //물주기 알람 설정
     private Boolean alarm;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
 
     protected Plant(){
 
     }
 
-    private Plant(String name, String grow, String kind, String card, String water, Boolean alarm){
+    private Plant(String name, String grow, String kind, String card, String water, Boolean alarm,User user){
         this.name = name;
         this.grow = grow;
         this.kind = kind;
@@ -48,15 +50,17 @@ public class Plant {
         this.water = water;
         love = 0l;
         this.alarm = alarm;
+        this.user = user;
     }
 
-    public static Plant from(PlantDto plantDto){
+    public static Plant from(PlantDto plantDto, User user){
         return new Plant(plantDto.getName(),
                 plantDto.getGrow(),
                 plantDto.getKind(),
                 plantDto.getCard(),
                 plantDto.getWater(),
-                plantDto.getAlarm());
+                plantDto.getAlarm(),
+                user);
     }
     
 }

@@ -6,6 +6,8 @@ import com.example.growth.domain.User;
 import com.example.growth.dto.PlantCardDto;
 import com.example.growth.dto.PlantDto;
 import com.example.growth.dto.api.PlantList;
+import com.example.growth.exception.PlantNotFoundException;
+import com.example.growth.exception.UserNotFoundException;
 import com.example.growth.repository.PlantRepository;
 import com.example.growth.repository.UserRepository;
 import com.example.growth.service.PlantService;
@@ -29,9 +31,8 @@ public class PlantServiceImpl implements PlantService {
 
     @Override
     public void savePlant(PlantDto plantDto, Long userId){
-
-        //todo... 나중에 익셉션 처리... 귀찮다 정말..
-        User user =  userRepository.findById(userId).orElseThrow(RuntimeException::new);
+        
+        User user =  userRepository.findById(userId).orElseThrow(UserNotFoundException::new);
         Plant plant = Plant.from(plantDto,user);
         plantRepository.save(plant);
 
@@ -48,16 +49,16 @@ public class PlantServiceImpl implements PlantService {
 
     @Override
     public void deletePlant(Long plantId, Long userId){
-        //todo... 나중에 익셉션 처리... 귀찮다 정말..
+
         Plant plant = plantRepository.findByIdAndUserId(plantId,userId)
-                .orElseThrow(RuntimeException::new);
+                .orElseThrow(PlantNotFoundException::new);
         plantRepository.delete(plant);
     }
 
     @Override
     public Plant getPlantDetail(Long id) {
-        //todo... 나중에 익셉션 처리... 귀찮다 정말..
-        return plantRepository.findById(id).orElseThrow(RuntimeException::new);
+
+        return plantRepository.findById(id).orElseThrow(PlantNotFoundException::new);
     }
 
 }

@@ -36,7 +36,7 @@ public class PlantController {
     public ResponseEntity<PlantInfo> getPlantInfo(@RequestParam String name){
         return new ResponseEntity<>(plantInfoFetchService.getPlantInfo(name), HttpStatus.OK);
     }
-    
+
 
     @Auth
     @PostMapping("plants/save")

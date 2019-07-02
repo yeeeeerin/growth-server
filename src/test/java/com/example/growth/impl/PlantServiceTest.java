@@ -1,8 +1,11 @@
 package com.example.growth.impl;
 
+import com.example.growth.Helper;
 import com.example.growth.domain.Plant;
+import com.example.growth.domain.User;
 import com.example.growth.dto.PlantDto;
 import com.example.growth.repository.PlantRepository;
+import com.example.growth.repository.UserRepository;
 import com.example.growth.service.PlantService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,8 +25,12 @@ public class PlantServiceTest {
     @Autowired
     private PlantService plantService;
 
+    @Autowired
+    private UserRepository userRepository;
+
     @Test
     public void 식물을_등록하면_plant테이블에_저장된다(){
+
         //given
         PlantDto plantDto = new PlantDto("꿀꿀이",
                         "장미",
@@ -31,9 +38,12 @@ public class PlantServiceTest {
                         "1",
                         "3",
                         true);
+        User user = Helper.createUser();
+        userRepository.save(user);
 
         //when
-        plantService.savePlant(plantDto);
+        plantService.savePlant(plantDto,user.getId());
+
 
         //then
         Plant plant = plantRepository.findAll().get(0);

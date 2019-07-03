@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -22,5 +23,8 @@ public class User {
     private String name;
 
     private String profileHref;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Plant> plants;
 
 }

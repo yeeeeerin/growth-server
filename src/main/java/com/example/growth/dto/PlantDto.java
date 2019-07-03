@@ -20,4 +20,6 @@ public class PlantDto {
     private Boolean alarm;
 
 
+
+
 }

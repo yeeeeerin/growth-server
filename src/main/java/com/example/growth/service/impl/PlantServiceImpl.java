@@ -31,7 +31,6 @@ public class PlantServiceImpl implements PlantService {
         User user =  userRepository.findById(userId).orElseThrow(UserNotFoundException::new);
         Plant plant = Plant.from(plantDto,user);
         plantRepository.save(plant);
-
     }
 
     @Override

@@ -65,14 +65,17 @@ public class PlantServiceTest {
     public void 식물정보가_7개있는_테이블을_조회(){
 
         //given
-        User user = Helper.createUser();
+        User user = new User();
         userRepository.save(user);
+
+        System.out.println(userRepository.findAll().size());
 
         for(int i=0;i<7;i++){
             Plant plant = Helper.createPlant(user);
             plantRepository.save(plant);
         }
 
+        System.out.println("plant!!"+plantRepository.findAll().size());
 
         //when
         //then
@@ -98,6 +101,27 @@ public class PlantServiceTest {
         //then
         Plant testPlant = plantRepository.findById(plant.getId()).get();
         assertThat(testPlant.getLove()).isEqualTo(1);
+    }
+
+    @Test
+    @Transactional
+    public void 같은날에_식물의_애정지수를_두번올릴수없다(){
+        //given
+        User user = Helper.createUser();
+        userRepository.save(user);
+
+        Plant plant = Helper.createPlant(user);
+        plantRepository.save(plant);
+
+        //when
+        plantService.updateLove(plant.getId());
+        plantService.updateLove(plant.getId());
+
+
+        //then
+        Plant testPlant = plantRepository.findById(plant.getId()).get();
+        assertThat(testPlant.getLove()).isEqualTo(1);
+
     }
 
 }

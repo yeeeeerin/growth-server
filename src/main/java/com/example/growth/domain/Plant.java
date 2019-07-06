@@ -4,6 +4,7 @@ import com.example.growth.dto.PlantDto;
 import lombok.Getter;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -33,6 +34,9 @@ public class Plant {
     //물주기 알람 설정
     private Boolean alarm;
 
+    //애정지수 업데이트
+    private LocalDateTime updateLove;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
@@ -61,6 +65,10 @@ public class Plant {
                 plantDto.getWater(),
                 plantDto.getAlarm(),
                 user);
+    }
+
+    public void setLove(){
+        love++;
     }
     
 }

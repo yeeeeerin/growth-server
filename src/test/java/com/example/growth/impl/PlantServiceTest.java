@@ -81,4 +81,23 @@ public class PlantServiceTest {
         assertThat(plantList.size()).isEqualTo(7);
     }
 
+    @Test
+    @Transactional
+    public void 식물의_애정지수를_올립니다(){
+
+        //given
+        User user = Helper.createUser();
+        userRepository.save(user);
+
+        Plant plant = Helper.createPlant(user);
+        plantRepository.save(plant);
+
+        //when
+        plantService.updateLove(plant.getId());
+
+        //then
+        Plant testPlant = plantRepository.findById(plant.getId()).get();
+        assertThat(testPlant.getLove()).isEqualTo(1);
+    }
+
 }

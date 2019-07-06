@@ -56,4 +56,11 @@ public class PlantServiceImpl implements PlantService {
         return plantRepository.findById(id).orElseThrow(PlantNotFoundException::new);
     }
 
+    @Override
+    public void updateLove(Long id){
+        Plant plant = plantRepository.findById(id)
+                .orElseThrow(PlantNotFoundException::new);
+        plant.setLove();
+    }
+
 }

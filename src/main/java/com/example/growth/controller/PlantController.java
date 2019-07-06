@@ -4,7 +4,7 @@ package com.example.growth.controller;
 import com.example.growth.domain.Plant;
 import com.example.growth.dto.PlantCardDto;
 import com.example.growth.dto.PlantDto;
-import com.example.growth.dto.api.PlantInfo;
+import com.example.growth.model.DefaultRes;
 import com.example.growth.service.PlantInfoFetchService;
 import com.example.growth.service.PlantService;
 import com.example.growth.utils.auth.Auth;
@@ -32,16 +32,16 @@ public class PlantController {
     })
     @Auth
     @PostMapping("/getPlantInfo")
-    public ResponseEntity<PlantInfo> getPlantInfo(@RequestParam String name){
-        return new ResponseEntity<>(plantInfoFetchService.getPlantInfo(name), HttpStatus.OK);
+    public ResponseEntity<DefaultRes> getPlantInfo(@RequestParam String name){
+        return new ResponseEntity<>(DefaultRes.res("success!",plantInfoFetchService.getPlantInfo(name)), HttpStatus.OK);
     }
 
 
     @Auth
     @PostMapping("plants/save")
-    public ResponseEntity<String> savePlant(@RequestBody PlantDto plantDto, @RequestParam Long userId){
+    public ResponseEntity<DefaultRes> savePlant(@RequestBody PlantDto plantDto, @RequestParam Long userId){
         plantService.savePlant(plantDto,userId);
-        return new ResponseEntity<>("success!", HttpStatus.OK);
+        return new ResponseEntity<>(DefaultRes.res("success!"), HttpStatus.OK);
     }
 
 
@@ -52,9 +52,10 @@ public class PlantController {
     })
     @Auth
     @PostMapping("/plants")
-    public ResponseEntity<List<PlantCardDto>> getPlants(@RequestParam int page, @RequestParam Long userId){
-        List plants = plantService.getPlants(page, userId);
-        return new ResponseEntity<>(plants, HttpStatus.OK);
+    public ResponseEntity<DefaultRes> getPlants(@RequestParam int page, @RequestParam Long userId){
+        List<PlantCardDto> plants = plantService.getPlants(page, userId);
+
+        return new ResponseEntity<>(DefaultRes.res("success!",plants), HttpStatus.OK);
     }
 
 
@@ -64,9 +65,9 @@ public class PlantController {
     })
     @Auth
     @PostMapping("/plants/{id}/detail")
-    public ResponseEntity<Plant> getPlantDetail(@PathVariable Long id){
+    public ResponseEntity<DefaultRes> getPlantDetail(@PathVariable Long id){
         Plant plant = plantService.getPlantDetail(id);
-        return new ResponseEntity<>(plant, HttpStatus.OK);
+        return new ResponseEntity<>(DefaultRes.res("success!",plant), HttpStatus.OK);
     }
 
 
@@ -77,10 +78,10 @@ public class PlantController {
     })
     @Auth
     @PostMapping("plants/{id}/delete")
-    public ResponseEntity<String> deletePlant(@PathVariable Long plantId,
+    public ResponseEntity<DefaultRes> deletePlant(@PathVariable Long plantId,
                                               @RequestParam Long userId){
         plantService.deletePlant(plantId,userId);
-        return new ResponseEntity<>("success!", HttpStatus.OK);
+        return new ResponseEntity<>(DefaultRes.res("success!"), HttpStatus.OK);
     }
 
 
@@ -90,9 +91,10 @@ public class PlantController {
     })
     @Auth
     @PostMapping("plants/{id}/love")
-    public ResponseEntity<Long> updateLove(@PathVariable Long plantId){
+    public ResponseEntity<DefaultRes> updateLove(@PathVariable Long plantId){
         Long love = plantService.updateLove(plantId);
-        return new ResponseEntity<>(love,HttpStatus.OK);
+        DefaultRes.res("success!",love);
+        return new ResponseEntity<>(DefaultRes.res("success!",love),HttpStatus.OK);
     }
 
 }

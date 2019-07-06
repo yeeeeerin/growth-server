@@ -15,7 +15,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import sun.rmi.runtime.Log;
 
 import java.util.List;
 
@@ -67,7 +66,7 @@ public class PlantController {
     @PostMapping("/plants/{id}/detail")
     public ResponseEntity<Plant> getPlantDetail(@PathVariable Long id){
         Plant plant = plantService.getPlantDetail(id);
-        return new ResponseEntity<Plant>(plant, HttpStatus.OK);
+        return new ResponseEntity<>(plant, HttpStatus.OK);
     }
 
 
@@ -77,11 +76,23 @@ public class PlantController {
             @ApiImplicitParam(name = "userId", value = "유저 pk 값", required = true, dataType = "long"),
     })
     @Auth
-    @PostMapping("plants/delete")
-    public ResponseEntity<String> deletePlant(@RequestParam Long plantId,
+    @PostMapping("plants/{id}/delete")
+    public ResponseEntity<String> deletePlant(@PathVariable Long plantId,
                                               @RequestParam Long userId){
         plantService.deletePlant(plantId,userId);
         return new ResponseEntity<>("success!", HttpStatus.OK);
+    }
+
+
+    @ApiOperation(value = "식물의 애정지수를 올립니다.")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "plantId", value = "식물의 pk 값", required = true, dataType = "long"),
+    })
+    @Auth
+    @PostMapping("plants/{id}/love")
+    public ResponseEntity<Long> updateLove(@PathVariable Long plantId){
+        Long love = plantService.updateLove(plantId);
+        return new ResponseEntity<>(love,HttpStatus.OK);
     }
 
 }

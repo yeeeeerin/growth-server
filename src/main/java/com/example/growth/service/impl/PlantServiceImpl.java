@@ -15,6 +15,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -54,6 +55,18 @@ public class PlantServiceImpl implements PlantService {
     public Plant getPlantDetail(Long id) {
 
         return plantRepository.findById(id).orElseThrow(PlantNotFoundException::new);
+    }
+
+    @Override
+    public Long updateLove(Long id){
+        Plant plant = plantRepository.findById(id)
+                .orElseThrow(PlantNotFoundException::new);
+
+        if(plant.getUpdateLove().getDayOfYear() != LocalDateTime.now().getDayOfYear()) {
+            plant.setLove();
+        }
+
+        return plant.getLove();
     }
 
 }

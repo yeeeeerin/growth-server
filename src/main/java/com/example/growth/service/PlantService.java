@@ -13,4 +13,6 @@ public interface PlantService {
     void deletePlant(Long plantId, Long userId);
 
     Plant getPlantDetail(Long id);
+
+    Long updateLove(Long id);
 }

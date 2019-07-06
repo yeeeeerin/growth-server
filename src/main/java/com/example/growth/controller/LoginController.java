@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class LoginController {
 
-    private static final DefaultRes FAIL_DEFAULT_RES = new DefaultRes(500, "서버 내부 에러");
+    private static final DefaultRes FAIL_DEFAULT_RES = new DefaultRes("서버 내부 에러");
 
     private final AuthService authService;
     

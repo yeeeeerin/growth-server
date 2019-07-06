@@ -9,26 +9,22 @@ import lombok.Data;
 @AllArgsConstructor
 public class DefaultRes<T> {
 
-    private int status;
-
     private String message;
 
     private T data;
 
-    public DefaultRes(final int status, final String message) {
-        this.status = status;
+    public DefaultRes(final String message) {
         this.message = message;
         this.data = null;
     }
 
-    public static<T> DefaultRes<T> res(final int status, final String message) {
-        return res(status, message, null);
+    public static<T> DefaultRes<T> res(final String message) {
+        return res(message, null);
     }
 
-    public static<T> DefaultRes<T> res(final int status, final String message, final T t) {
+    public static<T> DefaultRes<T> res(final String message, final T t) {
         return DefaultRes.<T>builder()
                 .data(t)
-                .status(status)
                 .message(message)
                 .build();
     }

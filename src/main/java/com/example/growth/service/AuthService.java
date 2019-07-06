@@ -39,11 +39,11 @@ public class AuthService {
             userRepository.save(newUser);
 
             final JwtService.TokenRes token = new JwtService.TokenRes(jwtService.create(newUser.getId()));
-            return DefaultRes.res(200, "로그인 성공", token);
+            return DefaultRes.res("로그인 성공", token);
 
         }
 
         final JwtService.TokenRes token = new JwtService.TokenRes(jwtService.create(user.getId()));
-        return DefaultRes.res(200, "로그인 성공", token);
+        return DefaultRes.res("로그인 성공", token);
     }
 }

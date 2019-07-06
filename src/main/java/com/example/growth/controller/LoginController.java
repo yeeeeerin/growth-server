@@ -1,5 +1,6 @@
 package com.example.growth.controller;
 
+import com.example.growth.dto.LoginDto;
 import com.example.growth.dto.TokenDto;
 import com.example.growth.model.DefaultRes;
 import com.example.growth.service.AuthService;
@@ -20,10 +21,10 @@ public class LoginController {
 
     private final AuthService authService;
     
-//dd
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody TokenDto tokenDto) {
         return new ResponseEntity<>(authService.login(tokenDto), HttpStatus.OK);
+
     }
 
     @ExceptionHandler(Exception.class)

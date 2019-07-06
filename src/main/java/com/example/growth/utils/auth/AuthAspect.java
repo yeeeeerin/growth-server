@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Optional;
 
 @Slf4j
 @Component
@@ -24,7 +25,7 @@ public class AuthAspect {
 
     private final static String AUTHORIZATION = "Authorization";
 
-    private final static DefaultRes DEFAULT_RES = DefaultRes.builder().status(401).message("인증 실패").build();
+    private final static DefaultRes DEFAULT_RES = DefaultRes.builder().message("인증 실패").build();
     private final static ResponseEntity<DefaultRes> RES_RESPONSE_ENTITY = new ResponseEntity<>(DEFAULT_RES, HttpStatus.UNAUTHORIZED);
 
     private final HttpServletRequest httpServletRequest;
@@ -52,7 +53,7 @@ public class AuthAspect {
         if (token == null) {
             return RES_RESPONSE_ENTITY;
         } else {
-            final User user = userRepository.findUserById(token.getUser_idx());
+            final Optional<User> user = userRepository.findById(token.getUser_idx());
 
             if (user == null) return RES_RESPONSE_ENTITY;
             return pjp.proceed(pjp.getArgs());

@@ -55,6 +55,7 @@ public class Plant {
         love = 0l;
         this.alarm = alarm;
         this.user = user;
+        updateLove = LocalDateTime.MIN;
     }
 
     public static Plant from(PlantDto plantDto, User user){
@@ -68,6 +69,7 @@ public class Plant {
     }
 
     public void setLove(){
+        updateLove = LocalDateTime.now();
         love++;
     }
     

@@ -90,9 +90,9 @@ public class PlantController {
     })
     @Auth
     @PostMapping("plants/{id}/love")
-    public ResponseEntity<String> updateLove(@PathVariable Long plantId){
-        plantService.updateLove(plantId);
-        return new ResponseEntity<>("success!",HttpStatus.OK);
+    public ResponseEntity<Long> updateLove(@PathVariable Long plantId){
+        Long love = plantService.updateLove(plantId);
+        return new ResponseEntity<>(love,HttpStatus.OK);
     }
 
 }

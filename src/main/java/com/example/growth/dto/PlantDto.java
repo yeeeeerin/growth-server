@@ -15,7 +15,7 @@ public class PlantDto {
 
     private String card;
 
-    private String water;
+    private Integer water;
 
     private Boolean alarm;
 

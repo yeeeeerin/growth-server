@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 @Slf4j
-@ControllerAdvice
+//@ControllerAdvice
 @RestController
 @RequiredArgsConstructor
 public class LoginController {
@@ -26,12 +26,12 @@ public class LoginController {
         return new ResponseEntity<>(authService.login(tokenDto), HttpStatus.OK);
 
     }
-
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity noLoginException(Exception e) {
-        log.error(e.getMessage());
-        return new ResponseEntity<>(FAIL_DEFAULT_RES, HttpStatus.INTERNAL_SERVER_ERROR);
-    }
+//
+//    @ExceptionHandler(Exception.class)
+//    public ResponseEntity noLoginException(Exception e) {
+//        log.error(e.getMessage());
+//        return new ResponseEntity<>(FAIL_DEFAULT_RES, HttpStatus.INTERNAL_SERVER_ERROR);
+//    }
 
 
 }

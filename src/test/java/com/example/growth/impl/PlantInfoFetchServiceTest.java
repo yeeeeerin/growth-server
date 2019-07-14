@@ -9,6 +9,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
@@ -73,6 +74,25 @@ public class PlantInfoFetchServiceTest {
 
 
         assertThat(uri.toString(),is(TEST_URL));
+    }
+
+    @Test
+    public void 식물의_리스트를_가져옵니다(){
+        URI uri = UriComponentsBuilder.fromHttpUrl(BASE_URL+"/gardenList")
+                .queryParam("apiKey", KEY)
+                .queryParam("sType", "sCntntsSj")
+                .queryParam("sText","나")
+                .build()
+                .encode(StandardCharsets.UTF_8)
+                .toUri();
+
+        PlantListDto response = restTemplate.getForObject(uri, PlantListDto.class);
+        List<Object> ob = response.getBody().getItems();
+        for(int i=0;i<ob.size()-3;i++){
+            String sb = String.valueOf(ob.get(i));
+            System.out.println(sb.split(",")[1]
+                    .split("=")[1]);
+        }
     }
 
 }

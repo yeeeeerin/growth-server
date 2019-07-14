@@ -36,6 +36,16 @@ public class PlantController {
         return new ResponseEntity<>(DefaultRes.res("success!",plantInfoFetchService.getPlantInfo(name)), HttpStatus.OK);
     }
 
+    @ApiOperation(value = "키워드로 농사로 api로부터 식물 리스트 가져오기")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "word", value = "식물 키워드", required = true, dataType = "string"),
+    })
+    @Auth
+    @PostMapping("/getPlantInfo")
+    public ResponseEntity<DefaultRes> getPlantNames(@RequestParam String word){
+        return new ResponseEntity<>(DefaultRes.res("success!",plantInfoFetchService.getPlantNames(word)), HttpStatus.OK);
+    }
+
 
     @Auth
     @PostMapping("plants/save")

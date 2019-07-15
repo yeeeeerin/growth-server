@@ -48,6 +48,10 @@ public class PlantController {
     }
 
 
+    @ApiOperation(value = "식물정보 저장하기")
+    @ApiImplicitParams(value = {
+            @ApiImplicitParam(name = "word", value = "식물 키워드", required = true, dataType = "PlantDto"),
+    })
     @Auth
     @PostMapping("plants/save")
     public ResponseEntity<DefaultRes> savePlant(@RequestBody PlantDto plantDto, @RequestParam Long userId){

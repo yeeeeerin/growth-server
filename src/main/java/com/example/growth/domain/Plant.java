@@ -25,7 +25,8 @@ public class Plant {
     private String kind;
 
     //일러스트
-    private String card;
+    @Enumerated(EnumType.STRING)
+    private PlantTypes card;
 
     //물주기 설정
     private Integer waterDate;
@@ -53,7 +54,7 @@ public class Plant {
 
     }
 
-    private Plant(String name, String grow, String kind, String card, Integer water,LocalDateTime waterTime, Boolean alarm,User user){
+    private Plant(String name, String grow, String kind, PlantTypes card, Integer water,LocalDateTime waterTime, Boolean alarm,User user){
         this.name = name;
         this.grow = grow;
         this.kind = kind;

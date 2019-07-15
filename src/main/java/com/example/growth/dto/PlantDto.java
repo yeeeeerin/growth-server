@@ -1,5 +1,6 @@
 package com.example.growth.dto;
 
+import com.example.growth.domain.PlantTypes;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -15,7 +16,7 @@ public class PlantDto {
     //나이/단계/레벨
     private String grow;
 
-    private String card;
+    private PlantTypes card;
 
     private Integer waterDate;
 

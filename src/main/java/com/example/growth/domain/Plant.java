@@ -2,6 +2,7 @@ package com.example.growth.domain;
 
 import com.example.growth.dto.PlantDto;
 import lombok.Getter;
+import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -27,7 +28,10 @@ public class Plant {
     private String card;
 
     //물주기 설정
-    private String water;
+    private Integer waterDate;
+
+    //물 알람 시간
+    private LocalDateTime waterTime;
 
     private Long love;
 
@@ -36,6 +40,9 @@ public class Plant {
 
     //애정지수 업데이트
     private LocalDateTime updateLove;
+
+    @CreatedDate
+    private LocalDateTime createAt;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -46,12 +53,13 @@ public class Plant {
 
     }
 
-    private Plant(String name, String grow, String kind, String card, String water, Boolean alarm,User user){
+    private Plant(String name, String grow, String kind, String card, Integer water,LocalDateTime waterTime, Boolean alarm,User user){
         this.name = name;
         this.grow = grow;
         this.kind = kind;
         this.card = card;
-        this.water = water;
+        waterDate = water;
+        this.waterTime = waterTime;
         love = 0l;
         this.alarm = alarm;
         this.user = user;
@@ -63,7 +71,8 @@ public class Plant {
                 plantDto.getGrow(),
                 plantDto.getKind(),
                 plantDto.getCard(),
-                plantDto.getWater(),
+                plantDto.getWaterDate(),
+                plantDto.getWaterTime(),
                 plantDto.getAlarm(),
                 user);
     }
@@ -72,5 +81,6 @@ public class Plant {
         updateLove = LocalDateTime.now();
         love++;
     }
+
     
 }

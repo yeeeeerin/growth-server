@@ -28,7 +28,10 @@ public class Plant {
     private String card;
 
     //물주기 설정
-    private Integer water;
+    private Integer waterDate;
+
+    //물 알람 시간
+    private LocalDateTime waterTime;
 
     private Long love;
 
@@ -50,12 +53,13 @@ public class Plant {
 
     }
 
-    private Plant(String name, String grow, String kind, String card, Integer water, Boolean alarm,User user){
+    private Plant(String name, String grow, String kind, String card, Integer water,LocalDateTime waterTime, Boolean alarm,User user){
         this.name = name;
         this.grow = grow;
         this.kind = kind;
         this.card = card;
-        this.water = water;
+        waterDate = water;
+        this.waterTime = waterTime;
         love = 0l;
         this.alarm = alarm;
         this.user = user;
@@ -67,7 +71,8 @@ public class Plant {
                 plantDto.getGrow(),
                 plantDto.getKind(),
                 plantDto.getCard(),
-                plantDto.getWater(),
+                plantDto.getWaterDate(),
+                plantDto.getWaterTime(),
                 plantDto.getAlarm(),
                 user);
     }

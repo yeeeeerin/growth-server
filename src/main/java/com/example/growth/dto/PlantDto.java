@@ -3,6 +3,8 @@ package com.example.growth.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import java.time.LocalDateTime;
+
 @Data
 @AllArgsConstructor
 public class PlantDto {
@@ -15,7 +17,9 @@ public class PlantDto {
 
     private String card;
 
-    private Integer water;
+    private Integer waterDate;
+
+    private LocalDateTime waterTime;
 
     private Boolean alarm;
 

@@ -18,7 +18,7 @@ public class WaterScheduler {
     @Scheduled(cron = "0 * * * * ?")
     public void send() {
 
-        notificationService.send();
+        //notificationService.send();
 
     }
 

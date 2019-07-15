@@ -1,11 +1,11 @@
 package com.example.growth.domain;
 
 public enum PlantTypes {
-    FLOWER("꽃"),
-    TREE("나무"),
-    DRUPE("다육이"),
-    WILD_FLOWER("야생화"),
-    HERB("허브");
+    FLOWER("꽃형"),
+    TREE("나무형"),
+    DRUPE("다육형"),
+    GRASS("풀형"),
+    LEAF("잎형");
 
     private final String name;
 

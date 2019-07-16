@@ -12,6 +12,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
+import java.util.LinkedList;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -39,6 +41,34 @@ public class PlantInfoFetchServiceImpl implements PlantInfoFetchService {
         return dto.getBody().getItem();
     }
 
+    @Override
+    public List<String> getPlantNames(String searchName){
+        URI uri = UriComponentsBuilder.fromHttpUrl(BASE_URL+"/gardenList")
+                .queryParam("apiKey", KEY)
+                .queryParam("sType", "sCntntsSj")
+                .queryParam("sText","나")
+                .build()
+                .encode(StandardCharsets.UTF_8)
+                .toUri();
+
+        PlantListDto response = restTemplate.getForObject(uri, PlantListDto.class);
+        List<Object> ob = response.getBody().getItems();
+        List<String> names = new LinkedList<>();
+        String name;
+        for(int i=0;i<ob.size()-3;i++){
+            String sb = String.valueOf(ob.get(i));
+
+            name = sb.split(",")[1]
+                    .split("=")[1];
+
+            names.add(name);
+        }
+
+        return names;
+    }
+
+
+
 
 
     private String getPlantCode(String name){
@@ -59,4 +89,5 @@ public class PlantInfoFetchServiceImpl implements PlantInfoFetchService {
 
 
     }
+
 }

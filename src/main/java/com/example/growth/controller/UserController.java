@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-public class LoginController {
+public class UserController {
 
     private final AuthService authService;
 
@@ -27,6 +27,16 @@ public class LoginController {
     @PostMapping("/login")
     public ResponseEntity<LoginDto> login(@RequestBody TokenDto tokenDto) {
         return new ResponseEntity<>(authService.login(tokenDto), HttpStatus.OK);
+    }
+
+
+    @GetMapping("/user/{id}/resisterToken")
+    public ResponseEntity<DefaultRes> resisterDeviceToken(@PathVariable Long id,
+                                                          @RequestParam String deviceToken){
+        authService.setDeviceToken(id,deviceToken);
+
+        return new ResponseEntity<>(DefaultRes.res("success!"), HttpStatus.OK);
+
     }
 
 }

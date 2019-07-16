@@ -29,10 +29,10 @@ public class ImageController {
     @ApiOperation(value = "해당 식물의 image 등록")
     @Auth
     @PostMapping("/uploadImage")
-    public ResponseEntity<DefaultRes> uploadImage(ImageDto imageDto, @RequestPart(value = "image", required = false) final MultipartFile image) {
+    public ResponseEntity uploadImage(ImageDto imageDto, @RequestPart(value = "image", required = false) final MultipartFile image) {
         if (image != null) imageDto.setImage(image);
         imageService.imageUpload(imageDto, image);
-        return new ResponseEntity<>(DefaultRes.res("image upload success", imageDto), HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 
@@ -43,8 +43,8 @@ public class ImageController {
     })
     @Auth
     @GetMapping("/getImage")
-    public ResponseEntity<DefaultRes<List<PlantImage>>> getImage(@RequestParam Long userId, @RequestParam Long plantId) {
-        return new ResponseEntity<>(DefaultRes.res("image get success", imageService.getImage(userId, plantId)), HttpStatus.OK);
+    public ResponseEntity<List<PlantImage>> getImage(@RequestParam Long userId, @RequestParam Long plantId) {
+        return new ResponseEntity<>(imageService.getImage(userId, plantId), HttpStatus.OK);
     }
 
 
@@ -54,9 +54,9 @@ public class ImageController {
     })
     @Auth
     @DeleteMapping("/deleteImage")
-    public ResponseEntity<DefaultRes> deleteImage(@RequestParam Long imageId) {
+    public ResponseEntity deleteImage(@RequestParam Long imageId) {
         imageService.deleteImage(imageId);
-        return new ResponseEntity<>(DefaultRes.res("image delete success"), HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 }

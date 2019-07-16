@@ -25,7 +25,7 @@ public class AuthService {
     private final KakaoService kakaoService;
 
     @Transactional
-    public DefaultRes<LoginDto> login(TokenDto tokenDto) {
+    public LoginDto login(TokenDto tokenDto) {
 
         UserVo userVo = kakaoService.getSocialUserInfo(tokenDto);
 
@@ -48,7 +48,7 @@ public class AuthService {
             final User user1 = userRepository.findBySocialId(userVo.getUserId());
             loginDto.setUserId(user1.getId());
 
-            return DefaultRes.res("로그인 성공", loginDto);
+            return loginDto;
 
         }
 
@@ -56,6 +56,6 @@ public class AuthService {
         loginDto.setToken(token.getToken());
         loginDto.setUserId(user.getId());
 
-        return DefaultRes.res("로그인 성공", loginDto);
+        return loginDto;
     }
 }

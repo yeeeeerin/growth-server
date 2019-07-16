@@ -4,6 +4,10 @@ import com.example.growth.dto.LoginDto;
 import com.example.growth.dto.TokenDto;
 import com.example.growth.model.DefaultRes;
 import com.example.growth.service.AuthService;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -12,26 +16,17 @@ import org.springframework.web.bind.annotation.*;
 
 
 @Slf4j
-@ControllerAdvice
 @RestController
 @RequiredArgsConstructor
 public class LoginController {
 
-    private static final DefaultRes FAIL_DEFAULT_RES = new DefaultRes("서버 내부 에러");
-
     private final AuthService authService;
-    
+
+
+    @ApiOperation(value = "카카오 소셜 로그인을 합니다.")
     @PostMapping("/login")
-    public ResponseEntity login(@RequestBody TokenDto tokenDto) {
+    public ResponseEntity<LoginDto> login(@RequestBody TokenDto tokenDto) {
         return new ResponseEntity<>(authService.login(tokenDto), HttpStatus.OK);
-
     }
-
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity noLoginException(Exception e) {
-        log.error(e.getMessage());
-        return new ResponseEntity<>(FAIL_DEFAULT_RES, HttpStatus.INTERNAL_SERVER_ERROR);
-    }
-
 
 }

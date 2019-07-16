@@ -24,6 +24,9 @@ public class User {
 
     private String profileHref;
 
+    //push알람을 위한 android device id
+    private String deviceToken;
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Plant> plants;
 

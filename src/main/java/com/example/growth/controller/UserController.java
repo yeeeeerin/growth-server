@@ -15,8 +15,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
-@Slf4j
 @RestController
+@RequestMapping("/api")
 @RequiredArgsConstructor
 public class UserController {
 

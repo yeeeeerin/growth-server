@@ -2,6 +2,7 @@ package com.example.growth.service.impl;
 
 import com.example.growth.domain.PlantImage;
 import com.example.growth.dto.ImageDto;
+import com.example.growth.exception.ImageNotFoundException;
 import com.example.growth.repository.ImageRepository;
 import com.example.growth.service.ImageService;
 import com.example.growth.service.S3FileUploadService;
@@ -17,6 +18,7 @@ import java.util.List;
 @Slf4j
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class ImageServiceImpl implements ImageService {
 
     private final S3FileUploadService s3FileUploadService;
@@ -24,7 +26,6 @@ public class ImageServiceImpl implements ImageService {
     private String image1;
 
     @Override
-    @Transactional
     public void imageUpload(ImageDto imageDto, MultipartFile image) {
 
         try {
@@ -46,16 +47,15 @@ public class ImageServiceImpl implements ImageService {
     }
 
     @Override
-    @Transactional
     public List<PlantImage> getImage(Long userId, Long plantId) {
         List<PlantImage> plantImages = imageRepository.findByUserIdAndPlantId(userId, plantId);
         return plantImages;
     }
 
     @Override
-    @Transactional
     public void deleteImage(Long imageId) {
-        imageRepository.deleteById(imageId);
+        PlantImage plantImage = imageRepository.findById(imageId).orElseThrow(ImageNotFoundException::new);
+        imageRepository.delete(plantImage);
     }
 
 }

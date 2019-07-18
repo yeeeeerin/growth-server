@@ -30,14 +30,16 @@ public class NotificationServiceImpl implements NotificationService {
                 .map(User::getDeviceToken)
                 .collect(Collectors.toList());
 
-        MulticastMessage message = MulticastMessage.builder()
-                .putData("message", "water!!")
-                .addAllTokens(deviceTokens)
-                .build();
-        try {
-            BatchResponse response = FirebaseMessaging.getInstance().sendMulticast(message);
-        } catch (FirebaseMessagingException e) {
-            e.printStackTrace();
+        if(deviceTokens.size() == 0){
+            MulticastMessage message = MulticastMessage.builder()
+                    .putData("message", "water!!")
+                    .addAllTokens(deviceTokens)
+                    .build();
+            try {
+                BatchResponse response = FirebaseMessaging.getInstance().sendMulticast(message);
+            } catch (FirebaseMessagingException e) {
+                e.printStackTrace();
+            }
         }
 
     }

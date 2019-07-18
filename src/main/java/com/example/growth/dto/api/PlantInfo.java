@@ -19,15 +19,15 @@ public class PlantInfo{
     @XmlElement(name = "managelevelCodeNm")
     private String manageLevel;
 
-    @ApiModelProperty(notes="식물 ")
+    @ApiModelProperty(notes="식물 온도")
     @XmlElement(name = "grwhTpCodeNm")
     private String growTemperature;
 
-    @ApiModelProperty(notes="식물 pk값")
+    @ApiModelProperty(notes="관리 정보")
     @XmlElement(name = "speclmanageInfo")
     private String manageInfo;
 
-    @ApiModelProperty(notes="식물 pk값")
+    @ApiModelProperty(notes="기능성 정보")
     @XmlElement(name = "fncltyInfo")
     private String fncltyInfo;
 

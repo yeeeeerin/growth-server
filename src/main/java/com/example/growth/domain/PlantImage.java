@@ -3,6 +3,7 @@ package com.example.growth.domain;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
+import org.joda.time.DateTime;
 
 import javax.persistence.*;
 
@@ -32,6 +33,6 @@ public class PlantImage {
     private TagTypes tag;
 
     @ApiModelProperty(notes="날짜")
-    private String date;
+    private DateTime date;
 
 }

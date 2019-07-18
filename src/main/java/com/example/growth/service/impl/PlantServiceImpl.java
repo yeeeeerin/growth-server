@@ -2,6 +2,7 @@ package com.example.growth.service.impl;
 
 
 import com.example.growth.domain.Plant;
+import com.example.growth.domain.PlantTypes;
 import com.example.growth.domain.User;
 import com.example.growth.dto.PlantCardDto;
 import com.example.growth.dto.PlantDto;
@@ -69,6 +70,26 @@ public class PlantServiceImpl implements PlantService {
         }
 
         return plant.getLove();
+    }
+
+    @Override
+    public void dummy(Long userId){
+        User user =  userRepository.findById(userId).orElseThrow(UserNotFoundException::new);
+
+        for(int i=0;i<13;i++){
+
+            PlantDto plantDto = new PlantDto("꿀꿀이"+i,
+                    "장미",
+                    "낮음",
+                    PlantTypes.FLOWER,
+                    i,
+                    LocalDateTime.now(),
+                    true);
+            Plant plant = Plant.from(plantDto,user);
+            plantRepository.save(plant);
+
+        }
+
     }
 
 }

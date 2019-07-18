@@ -15,4 +15,6 @@ public interface PlantService {
     Plant getPlantDetail(Long id);
 
     Long updateLove(Long id);
+
+    void dummy(Long userId);
 }

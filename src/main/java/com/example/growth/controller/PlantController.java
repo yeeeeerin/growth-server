@@ -114,4 +114,9 @@ public class PlantController {
         return new ResponseEntity<>(love,HttpStatus.OK);
     }
 
+    @GetMapping("dummy")
+    public void dummy(@RequestParam Long userId){
+        plantService.dummy(userId);
+    }
+
 }

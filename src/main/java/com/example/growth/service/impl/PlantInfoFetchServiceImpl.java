@@ -46,7 +46,7 @@ public class PlantInfoFetchServiceImpl implements PlantInfoFetchService {
         URI uri = UriComponentsBuilder.fromHttpUrl(BASE_URL+"/gardenList")
                 .queryParam("apiKey", KEY)
                 .queryParam("sType", "sCntntsSj")
-                .queryParam("sText","나")
+                .queryParam("sText",searchName)
                 .build()
                 .encode(StandardCharsets.UTF_8)
                 .toUri();

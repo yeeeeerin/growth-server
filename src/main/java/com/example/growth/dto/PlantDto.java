@@ -1,5 +1,6 @@
 package com.example.growth.dto;
 
+import com.example.growth.domain.PlantTypes;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -22,7 +23,7 @@ public class PlantDto {
     private String grow;
 
     @ApiModelProperty(dataType = "string",notes = "일러스트 종류", allowableValues = "FLOWER, TREE, DRUPE, WILD_FLOWER, HERB")
-    private String card;
+    private PlantTypes card;
 
     @ApiModelProperty(notes="물 주는 주기")
     private Integer waterDate;

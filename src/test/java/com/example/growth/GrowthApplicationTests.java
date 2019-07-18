@@ -13,4 +13,18 @@ public class GrowthApplicationTests {
     public void contextLoads() {
     }
 
+
+//    @Test
+//    public void pushMessage(){
+//        MulticastMessage message = MulticastMessage.builder()
+//                .putData("message", "water!!")
+//                .addToken("epv-fcTBLsk:APA91bHFV1ABmNnfTK4pROzrkgT9Lt3NfDlSCTjLC3UfHkwFab08iTAXt2_UwntSPjTBvbE-cX5pebhciA_shFytUsh3S-7HhMsNsR_B3MICkJmFN9m_41edcVJoPgBWJPCw9fuQYWy7")
+//                .build();
+//        try {
+//            BatchResponse response = FirebaseMessaging.getInstance().sendMulticast(message);
+//        } catch (FirebaseMessagingException e) {
+//            e.printStackTrace();
+//        }
+//    }
+
 }

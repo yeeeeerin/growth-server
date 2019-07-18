@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -12,6 +13,7 @@ import java.time.LocalDateTime;
 @Entity
 @Getter
 @ApiModel
+@EntityListeners(AuditingEntityListener.class)
 public class Plant {
 
     @GeneratedValue
@@ -33,7 +35,7 @@ public class Plant {
 
     //일러스트
     @ApiModelProperty(notes="일러스트")
-    @Enumerated(EnumType.STRING)
+    @Enumerated(value = EnumType.STRING)
     private PlantTypes card;
 
     //물주기 설정
@@ -85,7 +87,7 @@ public class Plant {
         return new Plant(plantDto.getName(),
                 plantDto.getGrow(),
                 plantDto.getKind(),
-                PlantTypes.valueOf(plantDto.getCard()),
+                plantDto.getCard(),
                 plantDto.getWaterDate(),
                 plantDto.getWaterTime(),
                 plantDto.getAlarm(),

@@ -46,19 +46,19 @@ public class PlantController {
     @Auth
     @PostMapping("/getPlantNames")
     public ResponseEntity<List<String>> getPlantNames(@RequestParam String word){
-        return new ResponseEntity(plantInfoFetchService.getPlantNames(word), HttpStatus.OK);
+        return new ResponseEntity<>(plantInfoFetchService.getPlantNames(word), HttpStatus.OK);
     }
 
 
     @ApiOperation(value = "식물정보 저장하기")
     @ApiImplicitParams(value = {
-            @ApiImplicitParam(name = "word", value = "식물 키워드", required = true, dataType = "PlantDto"),
+            @ApiImplicitParam(name = "plantDto", value = "식물 정보", required = true, dataType = "PlantDto"),
     })
     @Auth
     @PostMapping("plants/save")
-    public ResponseEntity savePlant(@RequestBody PlantDto plantDto, @RequestParam Long userId){
+    public ResponseEntity<String> savePlant(@RequestBody PlantDto plantDto, @RequestParam Long userId){
         plantService.savePlant(plantDto,userId);
-        return new ResponseEntity(HttpStatus.OK);
+        return new ResponseEntity<>("success!",HttpStatus.OK);
     }
 
 
@@ -95,10 +95,10 @@ public class PlantController {
     })
     @Auth
     @PostMapping("plants/{id}/delete")
-    public ResponseEntity deletePlant(@PathVariable Long plantId,
+    public ResponseEntity<String> deletePlant(@PathVariable Long plantId,
                                               @RequestParam Long userId){
         plantService.deletePlant(plantId,userId);
-        return new ResponseEntity(HttpStatus.OK);
+        return new ResponseEntity<>("success!",HttpStatus.OK);
     }
 
 

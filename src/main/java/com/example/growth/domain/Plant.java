@@ -85,7 +85,7 @@ public class Plant {
         return new Plant(plantDto.getName(),
                 plantDto.getGrow(),
                 plantDto.getKind(),
-                plantDto.getCard(),
+                PlantTypes.valueOf(plantDto.getCard()),
                 plantDto.getWaterDate(),
                 plantDto.getWaterTime(),
                 plantDto.getAlarm(),

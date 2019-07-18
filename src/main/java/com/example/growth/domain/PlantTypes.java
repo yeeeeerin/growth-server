@@ -12,4 +12,8 @@ public enum PlantTypes {
     PlantTypes(String name) {
         this.name = name;
     }
+
+    static PlantTypes getPlantType(String name){
+        return PlantTypes.valueOf(name);
+    }
 }

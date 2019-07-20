@@ -48,7 +48,7 @@ public class PlantDetailDto {
                 plant.getKind(),
                 plant.getGrow(),
                 plant.getCard(),
-                plant.getWaterDate(),
+                (LocalDateTime.now().getDayOfYear() - plant.getCreateAt().getDayOfYear())%plant.getWaterDate(),
                 plant.getLove(),
                 plant.getCreateAt());
     }

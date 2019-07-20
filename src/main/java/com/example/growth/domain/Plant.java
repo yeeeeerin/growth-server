@@ -60,6 +60,7 @@ public class Plant {
     @ApiModelProperty(notes="식물을 키우기 시작한 날")
     private LocalDateTime createAt;
 
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 

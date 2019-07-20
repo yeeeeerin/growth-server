@@ -49,7 +49,8 @@ public class PlantServiceTest {
                 PlantTypes.FLOWER,
                         3,
                         LocalDateTime.now(),
-                        true);
+                        true,
+                LocalDateTime.now());
 
 
         //when

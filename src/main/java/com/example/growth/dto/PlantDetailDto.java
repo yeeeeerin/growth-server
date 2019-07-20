@@ -38,7 +38,7 @@ public class PlantDetailDto {
     private Long love;
 
     @ApiModelProperty(notes="식물을 키우기 시작한 날")
-    private LocalDateTime createAt;
+    private LocalDateTime raiseDate;
 
 
 
@@ -48,9 +48,9 @@ public class PlantDetailDto {
                 plant.getKind(),
                 plant.getGrow(),
                 plant.getCard(),
-                (LocalDateTime.now().getDayOfYear() - plant.getCreateAt().getDayOfYear())%plant.getWaterDate(),
+                (LocalDateTime.now().getDayOfYear() - plant.getRaiseDate().getDayOfYear())%plant.getWaterDate(),
                 plant.getLove(),
-                plant.getCreateAt());
+                plant.getRaiseDate());
     }
 
 }

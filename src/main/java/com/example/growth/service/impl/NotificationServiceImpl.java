@@ -49,7 +49,7 @@ public class NotificationServiceImpl implements NotificationService {
         int day = LocalDateTime.now().getDayOfYear();
         return plantRepository.findByAlarm(Boolean.TRUE)
                 .stream()
-                .filter(plant -> plant.getCreateAt().getDayOfYear() - day == 0 )
+                .filter(plant -> plant.getRaiseDate().getDayOfYear() - day == 0 )
                 .filter(plant -> plant.getWaterTime().getHour() == LocalDateTime.now().getHour())
                 .filter(plant -> plant.getWaterTime().getMinute() == LocalDateTime.now().getMinute())
                 .collect(Collectors.toList());

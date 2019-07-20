@@ -2,8 +2,10 @@ package com.example.growth.impl;
 
 import com.example.growth.Helper;
 import com.example.growth.domain.Plant;
+import com.example.growth.domain.PlantTypes;
 import com.example.growth.domain.User;
 import com.example.growth.dto.PlantCardDto;
+import com.example.growth.dto.PlantDto;
 import com.example.growth.repository.PlantRepository;
 import com.example.growth.repository.UserRepository;
 import com.example.growth.service.PlantService;
@@ -14,6 +16,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -32,35 +35,35 @@ public class PlantServiceTest {
     @Autowired
     private UserRepository userRepository;
 
-//    @Test
-//    @Transactional
-//    public void 식물을_등록하면_plant테이블에_저장된다(){
-//
-//        //given
-//        User user = new User();
-//        userRepository.save(user);
-//
-//        PlantDto plantDto = new PlantDto("꿀꿀이",
-//                        "장미",
-//                        "낮음",
-//                PlantTypes.FLOWER,
-//                        3,
-//                        LocalDateTime.now(),
-//                        true,
-//                LocalDateTime.now());
-//
-//
-//        //when
-//        plantService.savePlant(plantDto,user.getId());
-//
-//
-//        //then
-//        Plant plant = plantRepository.findAll().get(0);
-//
-//        assertThat(plantDto.getName()).isEqualTo(plant.getName());
-//        assertThat(plantDto.getKind()).isEqualTo(plant.getKind());
-//        assertThat(plantDto.getCard()).isEqualTo(plant.getCard());
-//    }
+    @Test
+    @Transactional
+    public void 식물을_등록하면_plant테이블에_저장된다(){
+
+        //given
+        User user = new User();
+        userRepository.save(user);
+
+        PlantDto plantDto = new PlantDto("꿀꿀이",
+                        "장미",
+                        "낮음",
+                PlantTypes.FLOWER,
+                        3,
+                        LocalDateTime.now(),
+                        true,
+                LocalDateTime.now());
+
+
+        //when
+        plantService.savePlant(plantDto,user.getId());
+
+
+        //then
+        Plant plant = plantRepository.findAll().get(0);
+
+        assertThat(plantDto.getName()).isEqualTo(plant.getName());
+        assertThat(plantDto.getKind()).isEqualTo(plant.getKind());
+        assertThat(plantDto.getCard()).isEqualTo(plant.getCard());
+    }
 
     @Test
     @Transactional

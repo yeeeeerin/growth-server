@@ -37,7 +37,7 @@ public class PlantDto {
     private Boolean alarm;
 
     @ApiModelProperty(notes="식물을 키우기 시작한 날")
-    private LocalDateTime createAt;
+    private LocalDateTime raiseDate;
 
 
 

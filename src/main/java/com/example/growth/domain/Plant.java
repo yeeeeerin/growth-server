@@ -5,7 +5,6 @@ import com.example.growth.dto.PlantUpdateDto;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -13,7 +12,6 @@ import java.time.LocalDateTime;
 @Entity
 @Getter
 @ApiModel
-@EntityListeners(AuditingEntityListener.class)
 public class Plant {
 
     @GeneratedValue
@@ -69,7 +67,7 @@ public class Plant {
 
     }
 
-    private Plant(String name, String grow, String kind, PlantTypes card, Integer water,LocalDateTime waterTime, Boolean alarm,User user){
+    private Plant(String name, String grow, String kind, PlantTypes card, Integer water,LocalDateTime waterTime, Boolean alarm,User user,LocalDateTime createAt){
         this.name = name;
         this.grow = grow;
         this.kind = kind;
@@ -80,6 +78,7 @@ public class Plant {
         this.alarm = alarm;
         this.user = user;
         updateLove = LocalDateTime.MIN;
+        this.createAt = createAt;
     }
 
     public static Plant from(PlantDto plantDto, User user){
@@ -90,7 +89,8 @@ public class Plant {
                 plantDto.getWaterDate(),
                 plantDto.getWaterTime(),
                 plantDto.getAlarm(),
-                user);
+                user,
+                plantDto.getCreateAt());
     }
 
     public void setLove(){

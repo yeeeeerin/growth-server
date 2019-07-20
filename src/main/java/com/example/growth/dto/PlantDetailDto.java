@@ -1,6 +1,8 @@
 package com.example.growth.dto;
 
+import com.example.growth.domain.Plant;
 import com.example.growth.domain.PlantTypes;
+import com.example.growth.dto.api.PlantInfo;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -10,36 +12,46 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 
 @Data
+@ApiModel
 @AllArgsConstructor
 @NoArgsConstructor
-@ApiModel
-public class PlantDto {
+public class PlantDetailDto {
+
+    private PlantInfo plantInfo;
+
     @ApiModelProperty(notes="식물 이름")
     private String name;
 
     @ApiModelProperty(notes="식물 종류")
     private String kind;
 
-    //나이/단계/레벨
     @ApiModelProperty(notes="나이/ 단계/ 레벨")
     private String grow;
 
     @ApiModelProperty(dataType = "string",notes = "일러스트 종류", allowableValues = "FLOWER, TREE, DRUPE, WILD_FLOWER, HERB")
     private PlantTypes card;
 
-    @ApiModelProperty(notes="물 주는 주기")
+    @ApiModelProperty(notes="남은 물주기 시간")
     private Integer waterDate;
 
-    @ApiModelProperty(notes="물 주는 시간")
-    private LocalDateTime waterTime;
-
-    @ApiModelProperty(notes="알람 여부")
-    private Boolean alarm;
+    @ApiModelProperty(notes="애정")
+    private Long love;
 
     @ApiModelProperty(notes="식물을 키우기 시작한 날")
     private LocalDateTime createAt;
 
 
 
+    public static PlantDetailDto of(PlantInfo plantInfo, Plant plant){
+        return new PlantDetailDto(plantInfo,
+                plant.getName(),
+                plant.getKind(),
+                plant.getGrow(),
+                plant.getCard(),
+                plant.getWaterDate(),
+                plant.getLove(),
+                plant.getCreateAt());
+    }
 
 }
+

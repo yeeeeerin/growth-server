@@ -5,11 +5,14 @@ import com.example.growth.domain.Plant;
 import com.example.growth.domain.PlantTypes;
 import com.example.growth.domain.User;
 import com.example.growth.dto.PlantCardDto;
+import com.example.growth.dto.PlantDetailDto;
 import com.example.growth.dto.PlantDto;
+import com.example.growth.dto.PlantUpdateDto;
 import com.example.growth.exception.PlantNotFoundException;
 import com.example.growth.exception.UserNotFoundException;
 import com.example.growth.repository.PlantRepository;
 import com.example.growth.repository.UserRepository;
+import com.example.growth.service.PlantInfoFetchService;
 import com.example.growth.service.PlantService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
@@ -28,12 +31,23 @@ public class PlantServiceImpl implements PlantService {
 
     private final PlantRepository plantRepository;
     private final UserRepository userRepository;
+    private final PlantInfoFetchService plantInfoFetchService;
 
     @Override
     public void savePlant(PlantDto plantDto, Long userId){
 
         User user =  userRepository.findById(userId).orElseThrow(UserNotFoundException::new);
         Plant plant = Plant.from(plantDto,user);
+        plantRepository.save(plant);
+    }
+
+    @Override
+    public void updatePlant(PlantUpdateDto plantUpdateDto, Long userId, Long plantId){
+
+        userRepository.findById(userId).orElseThrow(UserNotFoundException::new);
+        Plant plant = plantRepository.findById(plantId).orElseThrow(PlantNotFoundException::new);
+        plant.setPlnat(plantUpdateDto);
+        
         plantRepository.save(plant);
     }
 
@@ -55,9 +69,11 @@ public class PlantServiceImpl implements PlantService {
     }
 
     @Override
-    public Plant getPlantDetail(Long id) {
+    public PlantDetailDto getPlantDetail(Long id) {
 
-        return plantRepository.findById(id).orElseThrow(PlantNotFoundException::new);
+        Plant plant = plantRepository.findById(id).orElseThrow(PlantNotFoundException::new);
+
+        return PlantDetailDto.of(plantInfoFetchService.getPlantInfo(plant.getKind()),plant);
     }
 
     @Override
@@ -84,7 +100,8 @@ public class PlantServiceImpl implements PlantService {
                     PlantTypes.FLOWER,
                     i,
                     LocalDateTime.now(),
-                    true);
+                    true,
+                    LocalDateTime.now());
             Plant plant = Plant.from(plantDto,user);
             plantRepository.save(plant);
 

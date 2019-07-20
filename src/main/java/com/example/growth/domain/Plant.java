@@ -1,10 +1,10 @@
 package com.example.growth.domain;
 
 import com.example.growth.dto.PlantDto;
+import com.example.growth.dto.PlantUpdateDto;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
-import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
@@ -57,11 +57,9 @@ public class Plant {
     @ApiModelProperty(notes="애정지수 업데이트 시간")
     private LocalDateTime updateLove;
 
-    @CreatedDate
-    @ApiModelProperty(notes="식물 등록 시간")
+    @ApiModelProperty(notes="식물을 키우기 시작한 날")
     private LocalDateTime createAt;
 
-    @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
@@ -97,6 +95,15 @@ public class Plant {
     public void setLove(){
         updateLove = LocalDateTime.now();
         love++;
+    }
+
+    public void setPlnat(PlantUpdateDto plant){
+        name = plant.getName();
+        grow = plant.getGrow();
+        waterDate = plant.getWaterDate();
+        waterTime = plant.getWaterTime();
+        alarm = plant.getAlarm();
+        createAt = plant.getCreateAt();
     }
 
     

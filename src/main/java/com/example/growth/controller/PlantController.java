@@ -1,9 +1,10 @@
 package com.example.growth.controller;
 
 
-import com.example.growth.domain.Plant;
 import com.example.growth.dto.PlantCardDto;
+import com.example.growth.dto.PlantDetailDto;
 import com.example.growth.dto.PlantDto;
+import com.example.growth.dto.PlantUpdateDto;
 import com.example.growth.dto.api.PlantInfo;
 import com.example.growth.model.DefaultRes;
 import com.example.growth.service.PlantInfoFetchService;
@@ -82,9 +83,22 @@ public class PlantController {
     })
     @Auth
     @PostMapping("/plants/{id}/detail")
-    public ResponseEntity<Plant> getPlantDetail(@PathVariable Long id){
-        Plant plant = plantService.getPlantDetail(id);
-        return new ResponseEntity<>(plant, HttpStatus.OK);
+    public ResponseEntity<PlantDetailDto> getPlantDetail(@PathVariable Long id){
+
+        return new ResponseEntity<>(plantService.getPlantDetail(id), HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "선택한 식물의 정보를 수정합니다.")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "식물 pk 값", required = true, dataType = "long"),
+    })
+    @Auth
+    @PostMapping("/plants/{id}/update")
+    public ResponseEntity<String> updatePlant(@PathVariable Long id,
+                                                      @RequestParam Long userId,
+                                                      @RequestBody PlantUpdateDto plantUpdateDto){
+        plantService.updatePlant(plantUpdateDto,userId,id);
+        return new ResponseEntity<>("success!!", HttpStatus.OK);
     }
 
 

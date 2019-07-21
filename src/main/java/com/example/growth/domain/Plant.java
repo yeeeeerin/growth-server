@@ -56,7 +56,7 @@ public class Plant {
     private LocalDateTime updateLove;
 
     @ApiModelProperty(notes="식물을 키우기 시작한 날")
-    private LocalDateTime createAt;
+    private LocalDateTime raiseDate;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -67,7 +67,7 @@ public class Plant {
 
     }
 
-    private Plant(String name, String grow, String kind, PlantTypes card, Integer water,LocalDateTime waterTime, Boolean alarm,User user,LocalDateTime createAt){
+    private Plant(String name, String grow, String kind, PlantTypes card, Integer water,LocalDateTime waterTime, Boolean alarm,User user,LocalDateTime raiseDate){
         this.name = name;
         this.grow = grow;
         this.kind = kind;
@@ -78,7 +78,7 @@ public class Plant {
         this.alarm = alarm;
         this.user = user;
         updateLove = LocalDateTime.MIN;
-        this.createAt = createAt;
+        this.raiseDate = raiseDate;
     }
 
     public static Plant from(PlantDto plantDto, User user){
@@ -90,7 +90,7 @@ public class Plant {
                 plantDto.getWaterTime(),
                 plantDto.getAlarm(),
                 user,
-                plantDto.getCreateAt());
+                plantDto.getRaiseDate());
     }
 
     public void setLove(){
@@ -104,7 +104,7 @@ public class Plant {
         waterDate = plant.getWaterDate();
         waterTime = plant.getWaterTime();
         alarm = plant.getAlarm();
-        createAt = plant.getCreateAt();
+        raiseDate = plant.getRaiseDate();
     }
 
     

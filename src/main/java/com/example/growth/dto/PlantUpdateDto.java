@@ -18,5 +18,5 @@ public class PlantUpdateDto {
     private Integer waterDate;
     private LocalDateTime waterTime;
     private Boolean alarm;
-    private LocalDateTime createAt;
+    private LocalDateTime raiseDate;
 }

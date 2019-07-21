@@ -95,7 +95,7 @@ public class PlantServiceImpl implements PlantService {
         for(int i=0;i<13;i++){
 
             PlantDto plantDto = new PlantDto("꿀꿀이"+i,
-                    "장미",
+                    "가울테리아",
                     "낮음",
                     PlantTypes.FLOWER,
                     i,

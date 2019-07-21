@@ -44,7 +44,7 @@ public class ImageController {
     public ResponseEntity uploadImage(ImageDto imageDto, @RequestPart(value = "image", required = false) final MultipartFile image) {
         if (image != null) imageDto.setImage(image);
         imageService.imageUpload(imageDto, image);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>("success!", HttpStatus.OK);
     }
 
 
@@ -68,7 +68,7 @@ public class ImageController {
     @DeleteMapping("/deleteImage")
     public ResponseEntity deleteImage(@RequestParam Long imageId) {
         imageService.deleteImage(imageId);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>("success!",HttpStatus.OK);
     }
 
 }

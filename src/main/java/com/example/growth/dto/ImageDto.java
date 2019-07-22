@@ -4,8 +4,8 @@ import com.example.growth.domain.TagTypes;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
-import org.joda.time.DateTime;
 import org.springframework.web.multipart.MultipartFile;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -25,5 +25,5 @@ public class ImageDto {
     private TagTypes tag;
 
     @ApiModelProperty(notes="날짜")
-    private DateTime date;
+    private String date;
 }

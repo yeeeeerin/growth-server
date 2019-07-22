@@ -23,22 +23,21 @@ public class ImageController {
 
     private final ImageService imageService;
 
-
     @ApiOperation(value = "해당 식물의 image 등록", notes = "  \"userId\": Long\n" +
             "  \"plantId\": Long\n" +
             "  \"image\": MultipartFile\n" +
             "  \"tag\": GERMINATE, LEAF, FLOWER, BUG, REPOTTING, FRUIT, NUTRITIONAL 상태를 나타내는 Enum타입\n" +
-            "  \"date\": DateTime\n")
+            "  \"date\": \"yyyy-MM-dd'T'HH:mm:ss\" 형식의 string\n")
     @ApiImplicitParams(value = {
             @ApiImplicitParam(name = "userId", value = "유저 pk값", required = true, dataType = "long", paramType = "formData"),
             @ApiImplicitParam(name = "plantId", value = "식물 pk값", required = true, dataType = "long", paramType = "formData"),
             @ApiImplicitParam(name = "image", value = "이미지", required = true, dataType = "MultipartFile", paramType = "formData"),
             @ApiImplicitParam(name = "tag", value = "태그", required = true, dataType = "TagTypes", paramType = "formData"),
-            @ApiImplicitParam(name = "date", value = "날짜", required = true, dataType = "DateTime", paramType = "formData"),
+            @ApiImplicitParam(name = "date", value = "날짜", required = true, dataType = "string", paramType = "formData"),
     })
     @Auth
     @PostMapping("/uploadImage")
-    public ResponseEntity uploadImage(ImageDto imageDto, @RequestPart(value = "image", required = false) final MultipartFile image) {
+    public ResponseEntity uploadImage(ImageDto imageDto, @RequestPart(value = "image", required = false) MultipartFile image) {
         if (image != null) imageDto.setImage(image);
         imageService.imageUpload(imageDto, image);
         return new ResponseEntity<>("success!", HttpStatus.OK);

@@ -3,9 +3,6 @@ package com.example.growth.domain;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
-import org.joda.time.DateTime;
-import org.joda.time.LocalDateTime;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 
@@ -35,6 +32,6 @@ public class PlantImage {
     private TagTypes tag;
 
     @ApiModelProperty(notes="날짜")
-    private LocalDateTime date;
+    private String date;
 
 }

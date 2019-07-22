@@ -4,10 +4,8 @@ import com.example.growth.domain.TagTypes;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
-import org.joda.time.DateTime;
-import org.joda.time.LocalDateTime;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -27,6 +25,5 @@ public class ImageDto {
     private TagTypes tag;
 
     @ApiModelProperty(notes="날짜")
-    @DateTimeFormat(pattern = "yyyy-mm-dd'T'hh:mm:ss")
-    private LocalDateTime date;
+    private String date;
 }

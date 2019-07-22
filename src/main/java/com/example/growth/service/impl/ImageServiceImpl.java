@@ -13,7 +13,11 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 @Slf4j
 @Service
@@ -32,18 +36,26 @@ public class ImageServiceImpl implements ImageService {
             if (image != null)
                 image1 = s3FileUploadService.upload(image);
 
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+            simpleDateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+            Date date = simpleDateFormat.parse(imageDto.getDate());
+            String stringDate = simpleDateFormat.format(date);
+
             PlantImage plantImage = new PlantImage();
             plantImage.setUserId(imageDto.getUserId());
             plantImage.setPlantId(imageDto.getPlantId());
             plantImage.setImageUrl(image1);
             plantImage.setTag(imageDto.getTag());
-            plantImage.setDate(imageDto.getDate());
+            plantImage.setDate(stringDate);
 
             imageRepository.save(plantImage);
 
         } catch (IOException e) {
             log.error(e.getMessage());
+        } catch (ParseException e) {
+            log.error(e.getMessage());
         }
+
     }
 
     @Override

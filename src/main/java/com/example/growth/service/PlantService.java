@@ -1,10 +1,7 @@
 package com.example.growth.service;
 
 
-import com.example.growth.dto.PlantCardDto;
-import com.example.growth.dto.PlantDetailDto;
-import com.example.growth.dto.PlantDto;
-import com.example.growth.dto.PlantUpdateDto;
+import com.example.growth.dto.*;
 
 import java.util.List;
 
@@ -16,7 +13,7 @@ public interface PlantService {
 
     PlantDetailDto getPlantDetail(Long id);
 
-    Long updateLove(Long id);
+    LoveDto updateLove(Long id);
 
 
 

@@ -4,10 +4,7 @@ package com.example.growth.service.impl;
 import com.example.growth.domain.Plant;
 import com.example.growth.domain.PlantTypes;
 import com.example.growth.domain.User;
-import com.example.growth.dto.PlantCardDto;
-import com.example.growth.dto.PlantDetailDto;
-import com.example.growth.dto.PlantDto;
-import com.example.growth.dto.PlantUpdateDto;
+import com.example.growth.dto.*;
 import com.example.growth.exception.PlantNotFoundException;
 import com.example.growth.exception.UserNotFoundException;
 import com.example.growth.repository.PlantRepository;
@@ -78,7 +75,7 @@ public class PlantServiceImpl implements PlantService {
     }
 
     @Override
-    public Long updateLove(Long id){
+    public LoveDto updateLove(Long id){
         Plant plant = plantRepository.findById(id)
                 .orElseThrow(PlantNotFoundException::new);
 
@@ -86,7 +83,8 @@ public class PlantServiceImpl implements PlantService {
             plant.setLove();
         }
 
-        return plant.getLove();
+
+        return new LoveDto(plant.getLove());
     }
 
     @Override

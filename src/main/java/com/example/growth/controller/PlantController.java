@@ -1,12 +1,8 @@
 package com.example.growth.controller;
 
 
-import com.example.growth.dto.PlantCardDto;
-import com.example.growth.dto.PlantDetailDto;
-import com.example.growth.dto.PlantDto;
-import com.example.growth.dto.PlantUpdateDto;
+import com.example.growth.dto.*;
 import com.example.growth.dto.api.PlantInfo;
-import com.example.growth.model.DefaultRes;
 import com.example.growth.service.PlantInfoFetchService;
 import com.example.growth.service.PlantService;
 import com.example.growth.utils.auth.Auth;
@@ -122,10 +118,8 @@ public class PlantController {
     })
     @Auth
     @PostMapping("plants/{plantId}/love")
-    public ResponseEntity<Long> updateLove(@PathVariable Long plantId){
-        Long love = plantService.updateLove(plantId);
-        DefaultRes.res("success!",love);
-        return new ResponseEntity<>(love,HttpStatus.OK);
+    public ResponseEntity<LoveDto> updateLove(@PathVariable Long plantId){
+        return new ResponseEntity<>(plantService.updateLove(plantId),HttpStatus.OK);
     }
 
     @GetMapping("dummy")

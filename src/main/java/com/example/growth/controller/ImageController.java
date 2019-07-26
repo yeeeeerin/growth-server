@@ -2,6 +2,7 @@ package com.example.growth.controller;
 
 import com.example.growth.domain.PlantImage;
 import com.example.growth.dto.ImageDto;
+import com.example.growth.dto.ResponseDto;
 import com.example.growth.service.ImageService;
 import com.example.growth.utils.auth.Auth;
 import io.swagger.annotations.ApiImplicitParam;
@@ -37,10 +38,10 @@ public class ImageController {
     })
     @Auth
     @PostMapping("/uploadImage")
-    public ResponseEntity uploadImage(ImageDto imageDto, @RequestPart(value = "image", required = false) MultipartFile image) {
+    public ResponseEntity<ResponseDto> uploadImage(ImageDto imageDto, @RequestPart(value = "image", required = false) MultipartFile image) {
         if (image != null) imageDto.setImage(image);
         imageService.imageUpload(imageDto, image);
-        return new ResponseEntity<>("success!", HttpStatus.OK);
+        return new ResponseEntity<>(ResponseDto.res("success!"), HttpStatus.OK);
     }
 
 
@@ -62,9 +63,9 @@ public class ImageController {
     })
     @Auth
     @DeleteMapping("/deleteImage")
-    public ResponseEntity deleteImage(@RequestParam Long imageId) {
+    public ResponseEntity<ResponseDto> deleteImage(@RequestParam Long imageId) {
         imageService.deleteImage(imageId);
-        return new ResponseEntity<>("success!",HttpStatus.OK);
+        return new ResponseEntity<>(ResponseDto.res("success!"),HttpStatus.OK);
     }
 
 }

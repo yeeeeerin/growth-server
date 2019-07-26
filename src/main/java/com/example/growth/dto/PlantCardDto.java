@@ -7,6 +7,8 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import java.time.LocalDateTime;
+
 @Data
 @AllArgsConstructor
 @ApiModel
@@ -20,8 +22,25 @@ public class PlantCardDto {
     private String kind;
     @ApiModelProperty(notes="식물 일러스트")
     private PlantTypes card;
+    @ApiModelProperty(notes="애정지수")
+    private Long love;
+    @ApiModelProperty(notes="물 주기")
+    private Integer waterCycle;
+    @ApiModelProperty(notes="남은 물 날자")
+    private Integer remainWaterDate;
+
 
     public static PlantCardDto from(Plant plant){
-        return new PlantCardDto(plant.getId(),plant.getName(),plant.getKind(),plant.getCard());
+        Integer remainWaterDate= LocalDateTime.now().getDayOfYear() - plant.getWaterTime().getDayOfYear();
+        remainWaterDate %= plant.getWaterDate();
+        return new PlantCardDto(
+                plant.getId(),
+                plant.getName(),
+                plant.getKind(),
+                plant.getCard(),
+                plant.getLove(),
+                plant.getWaterDate(),
+                remainWaterDate
+        );
     }
 }

@@ -108,7 +108,7 @@ public class PlantController {
             @ApiImplicitParam(name = "userId", value = "유저 pk 값", required = true, dataType = "long"),
     })
     @Auth
-    @PostMapping("plants/{id}/delete")
+    @PostMapping("plants/{plantId}/delete")
     public ResponseEntity<String> deletePlant(@PathVariable Long plantId,
                                               @RequestParam Long userId){
         plantService.deletePlant(plantId,userId);
@@ -118,10 +118,10 @@ public class PlantController {
 
     @ApiOperation(value = "식물의 애정지수를 올립니다.")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "plantId", value = "식물의 pk 값", required = true, dataType = "long"),
+            //@ApiImplicitParam(name = "plantId", value = "식물의 pk 값", required = true, dataType = "long"),
     })
     @Auth
-    @PostMapping("plants/{id}/love")
+    @PostMapping("plants/{plantId}/love")
     public ResponseEntity<Long> updateLove(@PathVariable Long plantId){
         Long love = plantService.updateLove(plantId);
         DefaultRes.res("success!",love);

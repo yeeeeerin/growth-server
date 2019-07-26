@@ -36,6 +36,7 @@ public class PlantServiceImpl implements PlantService {
     @Override
     public void savePlant(PlantDto plantDto, Long userId){
 
+        plantDto.setWaterTime(plantDto.getWaterTime().minusNanos(plantDto.getWaterTime().getNano()));
         User user =  userRepository.findById(userId).orElseThrow(UserNotFoundException::new);
         Plant plant = Plant.from(plantDto,user);
         plantRepository.save(plant);

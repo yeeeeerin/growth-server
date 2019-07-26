@@ -9,22 +9,37 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest
 public class GrowthApplicationTests {
 
+
+
     @Test
     public void contextLoads() {
     }
 
-
+//    @Autowired
+//    AndroidPushNotificationsService service;
+//
+//
 //    @Test
-//    public void pushMessage(){
-//        MulticastMessage message = MulticastMessage.builder()
-//                .putData("message", "water!!")
-//                .addToken("epv-fcTBLsk:APA91bHFV1ABmNnfTK4pROzrkgT9Lt3NfDlSCTjLC3UfHkwFab08iTAXt2_UwntSPjTBvbE-cX5pebhciA_shFytUsh3S-7HhMsNsR_B3MICkJmFN9m_41edcVJoPgBWJPCw9fuQYWy7")
-//                .build();
-//        try {
-//            BatchResponse response = FirebaseMessaging.getInstance().sendMulticast(message);
-//        } catch (FirebaseMessagingException e) {
-//            e.printStackTrace();
-//        }
+//    public void pushMessage() throws JSONException, ExecutionException, InterruptedException {
+//
+//        JSONObject body = new JSONObject();
+//        List<String> tokenlist = new ArrayList<>();
+//
+//        tokenlist.add();
+//
+//        JSONArray array = new JSONArray();
+//
+//        array.put(tokenlist.get(0));
+//
+//        body.put("registration_ids", array);
+//
+//        HttpEntity<String> request = new HttpEntity<>(body.toString());
+//
+//        CompletableFuture<String> push = service.send(request);
+//        CompletableFuture.allOf(push).join();
+//
+//        System.out.println(push.get());
+//
 //    }
 
 }

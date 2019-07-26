@@ -38,7 +38,7 @@ public class PlantDetailDto {
     private Long love;
 
     @ApiModelProperty(notes="식물을 키우기 시작한 날")
-    private LocalDateTime raiseDate;
+    private LocalDateTime waterTime;
 
 
 

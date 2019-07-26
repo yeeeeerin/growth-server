@@ -2,7 +2,7 @@ package com.example.growth.service.impl;
 
 
 import lombok.RequiredArgsConstructor;
-import org.apache.http.HttpEntity;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
@@ -19,7 +19,7 @@ public class AndroidPushNotificationsService {
     private final RestTemplate restTemplate;
 
     @Async
-    public CompletableFuture<String> send(HttpEntity entity){
+    public CompletableFuture<String> send(HttpEntity<String> entity){
         ArrayList<ClientHttpRequestInterceptor> interceptors = new ArrayList<>();
 
         interceptors.add(new HeaderRequestInterceptor("Authorization","key="+FIREBASE_SERVICE_KEY));

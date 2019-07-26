@@ -100,8 +100,7 @@ public class PlantServiceImpl implements PlantService {
                     PlantTypes.FLOWER,
                     i,
                     LocalDateTime.now(),
-                    true,
-                    LocalDateTime.now());
+                    true);
             Plant plant = Plant.from(plantDto,user);
             plantRepository.save(plant);
 

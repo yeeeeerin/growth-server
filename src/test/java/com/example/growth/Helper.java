@@ -19,7 +19,7 @@ public class Helper {
     }
 
     private static PlantDto createPlantDto(){
-        return new PlantDto("다육이", "선인장","0",PlantTypes.DRUPE,3, LocalDateTime.now(),true,LocalDateTime.now());
+        return new PlantDto("다육이", "선인장","0",PlantTypes.DRUPE,3, LocalDateTime.now(),true);
     }
 
 }

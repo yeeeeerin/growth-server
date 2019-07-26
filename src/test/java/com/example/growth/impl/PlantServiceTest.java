@@ -43,14 +43,13 @@ public class PlantServiceTest {
         User user = new User();
         userRepository.save(user);
 
-        PlantDto plantDto = new PlantDto("꿀꿀이",
+        PlantDto plantDto = new PlantDto("꿀꿀이0",
                         "장미",
                         "낮음",
                 PlantTypes.FLOWER,
                         3,
                         LocalDateTime.now(),
-                        true,
-                LocalDateTime.now());
+                        true);
 
 
         //when
